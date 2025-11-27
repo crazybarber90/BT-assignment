@@ -1,0 +1,4 @@
+id,first_name,last_name,dob,city,status,favorite_color
+1,John,Doe,1990-01-01,Berlin,active,Blue
+2,Alice,Smith,1995-05-05,London,inactive,Red
+3,Bob,Johnson,1988-09-12,Paris,active,Green

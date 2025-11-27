@@ -1,0 +1,4 @@
+id,first_name,last_name,dob,city,membership_level,department
+1,John,Doe,1990-01-01,Paris,Gold,Engineering
+2,Alice,Smith,1995-05-05,London,Platinum,Sales
+4,Sandra,Lee,1992-02-20,Rome,Silver,Marketing
