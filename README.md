@@ -1,3 +1,21 @@
+🏗️ Technology Stack
+Project Structure
+Monorepo: Turborepo
+Package Manager: Bun
+Apps: apps/frontend (Next.js) + apps/api (Hono)
+Backend Technologies
+Runtime: Bun
+Web Framework: Hono (fast, lightweight)
+API Layer: TRPC v11 (type-safe APIs)
+ORM: Drizzle ORM
+Database: PostgreSQL
+Frontend Technologies
+Framework: Next.js 15 (App Router)
+React: v19
+API Client: TRPC Client + React Query
+State Management: TanStack React Query v5
+Styling: TailwindCSS v4
+
 # **Technical Assignment Specification**
 
 ## **Member Import & Dynamic Profile System**
@@ -8,23 +26,23 @@
 
 Your task is to build a functional web application that allows users to:
 
-* Upload CSV files containing member information
+- Upload CSV files containing member information
 
-* Store and update member data
+- Store and update member data
 
-* Display a list of members on the start page
+- Display a list of members on the start page
 
-* Open a detailed profile page for each member
+- Open a detailed profile page for each member
 
-* View historical versions of member data to see how their information changed over time
+- View historical versions of member data to see how their information changed over time
 
 This assignment evaluates:
 
-* Backend modeling and extensibility
+- Backend modeling and extensibility
 
-* Ability to work with dynamic data
+- Ability to work with dynamic data
 
-* Frontend clarity and usability
+- Frontend clarity and usability
 
 If something is unclear, you may make reasonable assumptions and document them.
 
@@ -34,17 +52,17 @@ If something is unclear, you may make reasonable assumptions and document them.
 
 Your application must:
 
-* Accept CSV uploads
+- Accept CSV uploads
 
-* Store canonical and dynamic fields
+- Store canonical and dynamic fields
 
-* Update members when new CSVs are uploaded
+- Update members when new CSVs are uploaded
 
-* Display all members on the start page (canonical fields only)
+- Display all members on the start page (canonical fields only)
 
-* Display full details on the member profile page (canonical \+ dynamic fields)
+- Display full details on the member profile page (canonical \+ dynamic fields)
 
-* Preserve historical snapshots of member data when updates occur
+- Preserve historical snapshots of member data when updates occur
 
 The system must handle CSVs with different sets of fields.
 
@@ -56,13 +74,13 @@ The system must handle CSVs with different sets of fields.
 
 Every CSV will always contain the following **required fields**:
 
-* **id**
+- **id**
 
-* **first\_name**
+- **first_name**
 
-* **last\_name**
+- **last_name**
 
-* **dob**
+- **dob**
 
 These must be stored in a fixed, stable structure.
 
@@ -74,27 +92,27 @@ A CSV may contain any number of **extra fields** beyond the canonical ones.
 
 Examples include:
 
-* city
+- city
 
-* status
+- status
 
-* favorite\_color
+- favorite_color
 
-* membership\_level
+- membership_level
 
-* department
+- department
 
-* or any other additional field
+- or any other additional field
 
 Your system must:
 
-* Detect all dynamic fields
+- Detect all dynamic fields
 
-* Store them correctly
+- Store them correctly
 
-* Preserve them across multiple uploads
+- Preserve them across multiple uploads
 
-* Display them on the member profile page
+- Display them on the member profile page
 
 Dynamic fields are unpredictable and must be handled in a flexible, extensible way.
 
@@ -106,9 +124,9 @@ Members are uniquely identified by the **id** field.
 
 If two rows (even from different CSVs) use the same id:
 
-* They represent the **same member**
+- They represent the **same member**
 
-* The system must **update**, not duplicate, the member
+- The system must **update**, not duplicate, the member
 
 ---
 
@@ -120,23 +138,23 @@ The start page must include:
 
 1. **A CSV upload input**
 
-   * Accepts .csv files
+   - Accepts .csv files
 
-   * Sends the file to the backend for processing
+   - Sends the file to the backend for processing
 
 2. **A list of all members**, showing only the canonical fields:
 
-   * id
+   - id
 
-   * first\_name
+   - first_name
 
-   * last\_name
+   - last_name
 
-   * dob
+   - dob
 
 3. **Clickable member entries**
 
-   * Selecting a member opens their profile page
+   - Selecting a member opens their profile page
 
 ---
 
@@ -146,13 +164,13 @@ Each member profile page must display:
 
 #### **Canonical fields**
 
-* id
+- id
 
-* first\_name
+- first_name
 
-* last\_name
+- last_name
 
-* dob
+- dob
 
 #### **Dynamic fields**
 
@@ -166,9 +184,9 @@ They must not be hidden, discarded, or filtered out.
 
 Display all previous versions of the member's data, showing:
 
-* Previous values for all fields (canonical + dynamic)
+- Previous values for all fields (canonical + dynamic)
 
-* Timestamp of when each version was created
+- Timestamp of when each version was created
 
 ---
 
@@ -180,23 +198,23 @@ This is the core of the assignment.
 
 If the CSV row contains an id already present in the database:
 
-* Update the existing member
+- Update the existing member
 
 #### **Rule 2: Always Keep Latest Values**
 
 If a field appears in multiple uploads:
 
-* The **most recent upload** overrides earlier values
+- The **most recent upload** overrides earlier values
 
-* Fields not overwritten must remain stored
+- Fields not overwritten must remain stored
 
 #### **Rule 3: Add All New Dynamic Fields**
 
 If a new CSV introduces dynamic fields that were not previously stored for a member:
 
-* Add those fields
+- Add those fields
 
-* Do not remove fields unless overwritten
+- Do not remove fields unless overwritten
 
 ---
 
@@ -212,37 +230,37 @@ Stored in a predictable, stable database structure.
 
 Stored in a flexible structure that:
 
-* Accepts any number of dynamically named fields
+- Accepts any number of dynamically named fields
 
-* Requires no schema changes
+- Requires no schema changes
 
-* Allows straightforward retrieval
+- Allows straightforward retrieval
 
-* Supports merging across uploads
+- Supports merging across uploads
 
 ### **5.3 Merging Logic**
 
 Your backend must:
 
-* Create new members if id is new
+- Create new members if id is new
 
-* Update existing members when id matches
+- Update existing members when id matches
 
-* Add new dynamic fields
+- Add new dynamic fields
 
-* Overwrite values with latest uploads
+- Overwrite values with latest uploads
 
-* Collect all fields into a complete final record for display
+- Collect all fields into a complete final record for display
 
 ### **5.4 Historical Data Storage**
 
 Your backend must implement:
 
-* Storage of previous member states when updates occur
+- Storage of previous member states when updates occur
 
-* Timestamping of each historical version
+- Timestamping of each historical version
 
-* API endpoints to retrieve historical versions for a member
+- API endpoints to retrieve historical versions for a member
 
 ---
 
@@ -250,11 +268,11 @@ Your backend must implement:
 
 If something is unclear or unspecified, you may:
 
-* Make a reasonable assumption
+- Make a reasonable assumption
 
-* Implement based on that assumption
+- Implement based on that assumption
 
-* Document it in your notes
+- Document it in your notes
 
 These will be discussed during your project review.
 
@@ -266,24 +284,24 @@ These will be discussed during your project review.
 
 Your application must include:
 
-* CSV upload and processing
+- CSV upload and processing
 
-* Database storage of canonical \+ dynamic fields
+- Database storage of canonical \+ dynamic fields
 
-* Frontpage member list (canonical fields only)
+- Frontpage member list (canonical fields only)
 
-* Profile page showing all fields (canonical \+ dynamic)
+- Profile page showing all fields (canonical \+ dynamic)
 
-* Correct merging behavior for repeated CSV uploads  
-* 2 .csv files which can be used to test the application
+- Correct merging behavior for repeated CSV uploads
+- 2 .csv files which can be used to test the application
 
 ### **7.2 Documentation (NOTES.md)**
 
 Your notes must include:
 
-* Assumptions you made
+- Assumptions you made
 
-* What you would improve with more time
+- What you would improve with more time
 
 ---
 
@@ -291,21 +309,21 @@ Your notes must include:
 
 ### **Behavior:**
 
-* When a CSV is uploaded and a member with an existing id is updated:
+- When a CSV is uploaded and a member with an existing id is updated:
 
-  * The "current" member record should be overwritten with the latest data (canonical + dynamic).
+  - The "current" member record should be overwritten with the latest data (canonical + dynamic).
 
-  * But the previous state should still be accessible as history.
+  - But the previous state should still be accessible as history.
 
-* There must be a way to:
+- There must be a way to:
 
-  * See all historical versions of a member.
+  - See all historical versions of a member.
 
-  * For each version, see:
+  - For each version, see:
 
-    * The data at that time (canonical + dynamic).
+    - The data at that time (canonical + dynamic).
 
-    * A timestamp for when that version was created (e.g. upload time).
+    - A timestamp for when that version was created (e.g. upload time).
 
 ---
 
@@ -313,13 +331,12 @@ Your notes must include:
 
 We will evaluate:
 
-* Data model design and extensibility
+- Data model design and extensibility
 
-* Correctness of CSV parsing and merging
+- Correctness of CSV parsing and merging
 
-* Accuracy of dynamic field handling
+- Accuracy of dynamic field handling
 
-* UI simplicity and usability
+- UI simplicity and usability
 
 The goal is to understand how you think, design, and build code—not to produce a perfect production-ready system.
-
